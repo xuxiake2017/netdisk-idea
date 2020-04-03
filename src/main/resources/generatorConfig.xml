@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<!-- mysql驱动 -->
+	<classPathEntry location="D:\.m2\repository\mysql\mysql-connector-java\5.0.8\mysql-connector-java-5.0.8.jar" />
+	<context id="context1">
+
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<!-- 数据库连接信息 -->
+		<jdbcConnection connectionURL="jdbc:mysql://192.168.219.129:3306/netdisk"
+						driverClass="com.mysql.jdbc.Driver" password="136973" userId="xuxiake" />
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- 生成实体类 -->
+		<javaModelGenerator targetPackage="group.xuxiake.entity"
+							targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!-- 生成映射文件 -->
+		<sqlMapGenerator targetPackage="mapper"
+						 targetProject="src/main/resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<!-- 生成mapper接口 -->
+		<javaClientGenerator type="XMLMAPPER"
+							 targetPackage="group.xuxiake.mapper" targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<!-- 要生成的表 -->
+		<table tableName="user_friend_message" domainObjectName="UserFriendMessage"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false"/>
+	</context>
+</generatorConfiguration>

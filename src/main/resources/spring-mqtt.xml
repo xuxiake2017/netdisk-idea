@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:int-mqtt="http://www.springframework.org/schema/integration/mqtt"
+    xmlns:int="http://www.springframework.org/schema/integration"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/integration/mqtt http://www.springframework.org/schema/integration/mqtt/spring-integration-mqtt-4.3.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-4.3.xsd">
+
+	<!--mqtt客户端连接配置-->
+	<bean id="clientFactory"
+		  class="org.springframework.integration.mqtt.core.DefaultMqttPahoClientFactory">
+		<property name="cleanSession" value="#{mqtt.cleanSession}"/>
+		<property name="keepAliveInterval" value="#{mqtt.keepAliveInterval}"/>
+		<property name="serverURIs">
+			<array>
+				<value>#{mqtt.serverURIs}</value>
+			</array>
+		</property>
+	</bean>
+
+	<!--订阅消息转换器-->
+	<bean id="inBoundMessageConverter" class="org.springframework.integration.mqtt.support.DefaultPahoMessageConverter">
+		<property name="payloadAsBytes" value="true"></property>
+	</bean>
+	<!--发布消息转换器-->
+	<bean id="outBoundMessageConverter" class="org.springframework.integration.mqtt.support.DefaultPahoMessageConverter">
+		<property name="payloadAsBytes" value="true"></property>
+	</bean>
+
+	<!--订阅通道-->
+	<int:channel id="inboundChannel"></int:channel>
+	<!--发布通道-->
+	<int:channel id="outboundChannel"></int:channel>
+
+	<!--订阅-->
+	<int-mqtt:message-driven-channel-adapter
+			id="mqttInbound"
+			client-id="#{mqtt.inboundClientId}"
+			topics="#{mqtt.inboundTopic}"
+			client-factory="clientFactory"
+			channel="inboundChannel"
+			converter="inBoundMessageConverter"/>
+
+	<!--发布-->
+	<int-mqtt:outbound-channel-adapter
+			id="mqttOutbound"
+			client-id="#{mqtt.outboundClientId}"
+			client-factory="clientFactory"
+			default-topic="#{mqtt.outboundTopic}"
+			async="true"
+			channel="outboundChannel"
+	converter="outBoundMessageConverter"/>
+
+	<bean id="mqttMessageHandler" class="group.xuxiake.mqtt.MQTTMessageHandler" />
+
+	<!-- 消息处理类 -->
+	<int:service-activator id="serviceActivator" input-channel="inboundChannel" ref="mqttMessageHandler" method="handleMessage" />
+
+	<!--发送消息网关-->
+	<int:gateway id="gateway" default-request-channel="outboundChannel" service-interface="group.xuxiake.mqtt.MqttGateway"></int:gateway>
+
+</beans>

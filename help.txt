@@ -1,0 +1,210 @@
+fileType:
+文件夹 0
+文档 1 txt
+doc docx 11
+xls 12
+ppt 13
+pdf 14
+图片 2 png jpg jpeg gif
+音乐 3 mp3 ape flac
+视频 4 mp4 mkv avi rmvb flv
+压缩包 5 zip rar 7z
+安卓安装包 6 apk
+默认：其他 9
+
+上传文件：
+0 文件上传成功！
+1 文件上传失败！
+2 您的剩余空间不足，请删除部分文件再试
+3 单个文件超出最大值！
+4 上传文件的总的大小超出限制的最大值！
+5 文件上传超时！
+
+isDir:
+文件夹 0
+文件 1
+默认 文件 1
+
+checkMd5:
+0 上传成功
+1 上传失败
+2 您的剩余空间不足，请删除部分文件再试
+3 单个文件超出最大值！
+4 文件不存在
+checkUserName：
+已经存在：0
+不存在：1
+
+user status
+普通用户：0
+不存在：1
+vip用户：2
+被管理员删除：3
+
+checkPhone：
+已经存在：0
+不存在：1
+
+checkEmail：
+已经存在：0
+不存在：1
+
+用户填的是电话(0),是邮箱(1)
+
+发送短信
+0 成功 1 失败 2 操作频繁
+
+短信验证码或邮箱验证码验证
+0 成功 1 失败 2 超时
+
+登陆：
+0 登陆成功
+1 验证码错误
+2 账号不存在
+3 密码错误
+4 登陆失败
+
+检查分享文件的提取密码：
+0 正确
+1 错误
+
+保存到云盘：
+0 成功
+1 失败
+2 请先登录
+3 空间不足
+4 用户没有点击“保存到云盘”，但又进行了登陆
+
+mkDir
+0 成功
+1 失败
+
+shareFile表：
+id
+shareId
+shareFilePath
+shareUserId
+shareUser
+sharePwd
+shareStatus
+
+回收站：
+recycleStatus
+0 文件被删除，还可以找回
+1 文件被删除，已经找回
+2 文件被删除，10天后彻底被删除，不能再找回
+
+fileStatus
+0 正常
+1 主动删除
+2 因删除文件夹被动删除
+3 被管理员删除
+
+sharefile status
+0 正常
+1 被用户删除
+2 被管理员删除
+
+RecycleController
+delete:
+0 删除成功
+1 删除失败
+reback:
+0 恢复成功
+1 恢复失败
+
+重命名：
+reName
+0 成功
+1 失败
+2 是文件夹，当前目录下有同名文件夹，失败
+
+ffmpeg -i source.mp3 -vn -ar 44100 -ac 2 -ab 128 -f mp3 output.mp3
+
+
+ffmpeg.exe -y -i "C:\Users\user1\Videos\169_ruse_announcement_trailer_mul_033109_hr.mp4" -f webm -vcodec libvpx -acodec libvorbis -vb 1600000 "C:\Users\user1\Videos\169_ruse_announcement_trailer_mul_033109_hr.webmvp8.webm"
+
+FFMPEG -i test.wmv -c:v libx264 -strict -2 test.mp4
+
+ffmpeg -i 1.avi -vf scale=360:-1 -vcodec h264 output.mp4
+
+ffmpeg -i 1.avi -vf scale=360:270:force_original_aspect_ratio=decrease -vcodec h264 output.mp4
+
+ffmpeg -y -i 1.mp4 -vf scale=480:360:force_original_aspect_ratio=decrease -vcodec h264 output.mp4
+
+
+ffmpeg -y -i 1.mp4 -vf scale="360:trunc(ow/a/2)*2" -vcodec h264 output.mp4
+
+
+CFLAGS="-fPIC -m64" ./configure \
+--prefix=/usr/local/cellar/ffmpeg \
+--extra-cflags="-I/usr/local/cellar/ffmpeg_build/include" \
+--extra-ldflags="-L/usr/local/cellar/ffmpeg_build/lib" \
+--extra-libs=-ldl \
+--bindir=/usr/bin \
+--enable-version3 \
+--enable-zlib \
+--enable-pic \
+--enable-gpl \
+--enable-nonfree \
+--enable-pthreads \
+--enable-libfdk_aac \
+--enable-libfreetype \
+--enable-libmp3lame \
+--enable-libvpx \
+--enable-libx264
+
+
+
+./configure --prefix="/usr/ffmpeg/ffmpeg_build" --bindir="/usr/ffmpeg/bin"
+./configure --prefix="/usr/ffmpeg/ffmpeg_build" --bindir="/usr/ffmpeg/bin"
+PKG_CONFIG_PATH="/usr/ffmpeg/ffmpeg_build/lib/pkgconfig" ./configure --prefix="/usr/ffmpeg/ffmpeg_build" --bindir="/usr/ffmpeg/bin" --enable-static
+cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX="/usr/ffmpeg/ffmpeg_build" -DENABLE_SHARED:bool=off ../../source
+./configure --prefix="/usr/ffmpeg/ffmpeg_build" --disable-shared
+./configure --prefix="/usr/ffmpeg/ffmpeg_build" --bindir="/usr/ffmpeg/bin" --disable-shared --enable-nasm
+./configure --prefix="/usr/ffmpeg/ffmpeg_build" --disable-shared
+./configure --prefix="/usr/ffmpeg/ffmpeg_build" --disable-shared
+./configure --prefix="/usr/ffmpeg/ffmpeg_build" --with-ogg="/usr/ffmpeg/ffmpeg_build" --disable-shared
+./configure --prefix="/usr/ffmpeg/ffmpeg_build" --disable-examples --disable-unit-tests --enable-vp9-highbitdepth --as=yasm
+
+
+PATH="/usr/ffmpeg/bin:$PATH" PKG_CONFIG_PATH="/usr/ffmpeg/ffmpeg_build/lib/pkgconfig" ./configure \
+  --prefix="/usr/ffmpeg/ffmpeg_build" \
+  --pkg-config-flags="--static" \
+  --extra-cflags="-I/usr/ffmpeg/ffmpeg_build/include" \
+  --extra-ldflags="-L/usr/ffmpeg/ffmpeg_build/lib" \
+  --extra-libs=-lpthread \
+  --extra-libs=-lm \
+  --bindir="/usr/ffmpeg/bin" \
+  --enable-gpl \
+  --enable-libfdk_aac \
+  --enable-libfreetype \
+  --enable-libmp3lame \
+  --enable-libopus \
+  --enable-libvorbis \
+  --enable-libvpx \
+  --enable-libx264 \
+  --enable-libx265 \
+  --enable-nonfree
+
+
+
+
+
+PATH="/usr/local/cpffmpeg/bin:$PATH" PKG_CONFIG_PATH="/usr/local/cpffmpeg/lib/pkgconfig" ./configure --prefix=/usr/local/cpffmpeg --enable-shared --enable-nonfree \
+		--enable-gpl --enable-pthreads  --enable-libopencore-amrnb \
+		--enable-libopencore-amrwb --enable-libmp3lame \
+		--enable-libtheora --enable-libvorbis  --enable-libx264  --enable-libxvid \
+		--extra-cflags="-I/usr/local/cpffmpeg/include" --extra-ldflags="-L/usr/local/cpffmpeg/lib" \
+		 --enable-version3 --extra-version=syslint
+
+
+
+
+链接: https://www.xuxiake.online:8080/netdisk/s/V6qzTHHW 密码: Oo4o
+
+cp -r /data/wwwroot/default/netdisk/mediaCache/ /home/www/mediaCache
+cp -r /data/wwwroot/default/netdisk/WEB-INF/upload/ /home/www/upload
+
+cp -r /home/www/mediaCache /data/wwwroot/default/netdisk/mediaCache/
+cp -r /home/www/upload /data/wwwroot/default/netdisk/WEB-INF/upload/
